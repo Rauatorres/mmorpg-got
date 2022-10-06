@@ -15,4 +15,12 @@ module.exports = (app) => {
     app.src.controller.jogo.jogo(app, req, res)
   })
   
+  app.post('/autenticar', (req, res)=>{
+    app.src.controller.jogo.autenticar(app, req, res)
+  })
+  
+  app.get('/sair', (req, res)=>{
+    app.src.controller.jogo.sair(app, req, res)
+  })
+  
 }

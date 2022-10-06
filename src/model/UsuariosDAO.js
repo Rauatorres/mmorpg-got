@@ -19,6 +19,14 @@ module.exports = (app)=>{
       return res
     }
     
+    async queryOne(dados){
+      let res
+      await this.executeMethod(async ()=>{
+        res = await this.usuarios.findOne(dados)
+      })
+      return res
+    }
+    
     async insertUsuario(user){
       await this.executeMethod(async ()=>{
         await this.usuarios.insertOne(user)

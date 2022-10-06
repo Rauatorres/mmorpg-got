@@ -1,5 +1,5 @@
 module.exports.index = (app, req, res)=>{
-  res.render(`index`)
+  res.render(`index`, {validacao: {}})
 }
 
 module.exports.cadastro = (app, req, res)=>{
