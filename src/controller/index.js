@@ -20,7 +20,18 @@ module.exports.cadastrar = async (app, req, res)=>{
   }
   
   const UsuariosDAO = new app.src.model.UsuariosDAO()
-  await UsuariosDAO.insertUsuario(req.body)
-  console.log(await UsuariosDAO.queryAll())
+  const JogoDAO = new app.src.model.JogoDAO()
+
+  await UsuariosDAO.insert(req.body)
+  await JogoDAO.insert({
+    usuario: req.body,
+    moeda: 15,
+    suditos: 10,
+    temor: Math.floor(Math.random() * 1000),
+    sabedoria: Math.floor(Math.random() * 1000),
+    comercio: Math.floor(Math.random() * 1000),
+    magia: Math.floor(Math.random() * 1000)
+  })
+
   res.redirect('/')
 }
