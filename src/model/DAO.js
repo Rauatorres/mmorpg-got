@@ -3,6 +3,7 @@ module.exports = (app)=>{
         constructor(collection){
             this.dbConnection = app.src.model.DBconnect
             this.usuarios = this.dbConnection.db.collection(collection)
+            this.ObjectID = this.dbConnection.ObjectId
         }
         
         async executeMethod(method){
@@ -20,6 +21,9 @@ module.exports = (app)=>{
           }
           
           async queryOne(dados){
+            if (dados.hasOwnProperty('_id')){
+              dados._id = new this.ObjectID(dados._id)
+            }
             let res
             await this.executeMethod(async ()=>{
               res = await this.usuarios.findOne(dados)

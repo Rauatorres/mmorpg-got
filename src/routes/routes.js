@@ -22,5 +22,13 @@ module.exports = (app) => {
   app.get('/sair', (req, res)=>{
     app.src.controller.jogo.sair(app, req, res)
   })
+
+  app.get('/suditos', (req, res)=>{
+    app.src.controller.jogo.suditos(app, req, res)
+  })
+  
+  app.get('/pergaminhos', (req, res)=>{
+    app.src.controller.jogo.pergaminhos(app, req, res)
+  })
   
 }

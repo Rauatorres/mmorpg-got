@@ -22,16 +22,39 @@ module.exports.autenticar = async (app, req, res)=>{
   }
 }
 
-module.exports.jogo = (app, req, res)=>{
-  if(req.session.authorized){
-    res.render('jogo')  
-  }else{
+module.exports.jogo = async (app, req, res)=>{
+
+  if(!req.session.authorized){
     res.redirect('/')
+    return
   }
+
+  const UsuariosDAO = new app.src.model.UsuariosDAO()
+  const JogoDAO = new app.src.model.JogoDAO()
+
+
+  let usuario = await UsuariosDAO.queryOne({usuario: req.session.usuario})
+  let usuarioReordenado = Object.assign({
+    nome: null,
+    usuario: null,
+    senha: null,
+    casa: null
+  }, usuario)
+  let usuarioInfo = await JogoDAO.queryOne({usuario: usuarioReordenado})
+
+  res.render('jogo', {usuarioInfo: usuarioInfo})  
 }
 
 module.exports.sair = (app, req, res)=>{
   req.session.destroy((err)=>{
     res.redirect('/')
   })
+}
+
+module.exports.suditos = (app, req, res)=>{
+  res.render('aldeoes')
+}
+
+module.exports.pergaminhos = (app, req, res)=>{
+  res.render('pergaminhos')
 }
