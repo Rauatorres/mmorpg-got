@@ -2,6 +2,9 @@ module.exports = (app) => {
   app.get('/', (req, res)=>{
     app.src.controller.index.index(app, req, res)
   })
+  app.get('/index', (req, res)=>{
+    app.src.controller.index.index(app, req, res)
+  })
   
   app.get('/cadastro', (req, res)=>{
     app.src.controller.index.cadastro(app, req, res)

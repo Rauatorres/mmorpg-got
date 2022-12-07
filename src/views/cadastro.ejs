@@ -14,6 +14,14 @@
 		<!-- incluindo css -->
 		<link href="css/style.css" rel="stylesheet">
 
+		<script>
+			$(document).ready(()=>{
+				$('#botao_voltar').click(()=>{
+					window.location.href = '/'
+				})
+			})
+		</script>
+
 	</head>
 
 	<body class="body-index">
@@ -22,7 +30,7 @@
 			<div class="container">
 				<form class="form-inline form-entrar">
 					<div class="form-group">				
-						<button type="button" class="btn btn-success">Voltar</button>
+						<button type="button" class="btn btn-success" id="botao_voltar">Voltar</button>
 					</div>
 				</form>
 			</div>

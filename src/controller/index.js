@@ -1,5 +1,11 @@
 module.exports.index = (app, req, res)=>{
-  res.render(`index`, {validacao: {}})
+  let cadastrado = ''
+  if(req.query.cadastrado != null){
+    cadastrado = req.query.cadastrado
+  }else{
+    cadastrado = {}
+  }
+  res.render(`index`, {validacao: {}, msg: cadastrado})
 }
 
 module.exports.cadastro = (app, req, res)=>{
@@ -33,5 +39,5 @@ module.exports.cadastrar = async (app, req, res)=>{
     magia: Math.floor(Math.random() * 1000)
   })
 
-  res.redirect('/')
+  res.redirect('/index?cadastrado=Y')
 }
