@@ -25,4 +25,5 @@ consign().
 
 app.listen(3000, ()=>{
   console.log('Successfully started server! Listening on http://localhost:3000')
+  // console.log(app)
 })

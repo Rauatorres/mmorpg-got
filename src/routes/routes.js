@@ -26,9 +26,17 @@ module.exports = (app) => {
   app.get('/suditos', (req, res)=>{
     app.src.controller.jogo.suditos(app, req, res)
   })
-  
+
   app.get('/pergaminhos', (req, res)=>{
     app.src.controller.jogo.pergaminhos(app, req, res)
+  })
+
+  app.post('/acao_suditos', (req, res)=>{
+    app.src.controller.jogo.acaoSuditos(app, req, res)
+  })
+
+  app.get('/revogar_acao', (req, res)=>{
+    app.src.controller.jogo.revogar(app, req, res)
   })
   
 }

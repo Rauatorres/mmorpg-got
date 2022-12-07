@@ -21,6 +21,7 @@
 		    })
 
 			$('#btn_suditos').click(()=>{
+				$('#msg_erro').hide()
 				$.ajax({
 					url: "/suditos",
 					mehtod: "get",
@@ -30,7 +31,7 @@
 				})
 			})
 
-			$('#btn_pergaminhos').click(()=>{
+			function ajaxPergaminhos(){
 				$.ajax({
 					url: "/pergaminhos",
 					mehtod: "get",
@@ -38,8 +39,38 @@
 						$('.acoes').html(data)
 					}
 				})
+			}
+
+			var btnPergaminhoClicado = false
+			$('#btn_pergaminhos').click(()=>{
+				$('#msg_erro').hide()
+				ajaxPergaminhos()
+				if(!btnPergaminhoClicado){
+					btnPergaminhoClicado = true
+					setInterval(cronometro, 1000)
+				}
 			})
+			
 		  })
+
+		  function cronometro(){
+			let txt_segundos = document.querySelectorAll('.txt_segundos')
+			txt_segundos.forEach(txt=>{
+				let segundos = parseInt(txt.innerHTML)
+				let segundosAtuais = segundos - 1
+				if(segundosAtuais >= 0){
+					txt.innerHTML = segundosAtuais
+				}else{
+					window.location.href = "/jogo?msg=C"
+				}
+
+			})
+			// 	console.log($('.txt_segundos').html())
+				
+			//   $('.txt_segundos').each(()=>{
+			// 	  console.log($(this))
+			// })
+		  }
 		</script>
 
 	</head>
@@ -55,6 +86,24 @@
 		</nav>
 
 	    <div class="container">
+
+			<% if(msg == 'A'){ %>
+				<div class="alert alert-danger" id="msg">
+					<strong>Operação inválida, verifique se todos os campos foram preenchidos!</strong>
+				</div>
+			<% } %>
+
+			<% if(msg == 'B'){ %>
+				<div class="alert alert-info" id="msg">
+					<strong>Ação executada com sucesso!</strong>
+				</div>
+			<% } %>
+
+			<% if(msg == 'C'){ %>
+				<div class="alert alert-info" id="msg">
+					<strong>Ação finalizada!</strong>
+				</div>
+			<% } %>
 	    	
 			<div class="row">
 	    		<div class="col-sm-3 casa">
